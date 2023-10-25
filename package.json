@@ -1,0 +1,26 @@
+{
+  "name": "imitator",
+  "version": "0.0.0",
+  "description": "A mod for The Binding of Isaac: Repentance.",
+  "keywords": [
+    "isaac",
+    "mod",
+    "rebirth",
+    "afterbirth",
+    "repentance"
+  ],
+  "license": "GPL-3.0",
+  "type": "module",
+  "dependencies": {
+    "isaac-typescript-definitions": "^37.0.1",
+    "isaacscript-common": "^73.1.1"
+  },
+  "devDependencies": {
+    "isaacscript": "^3.16.0",
+    "isaacscript-lint": "^6.2.0",
+    "isaacscript-spell": "^1.6.0",
+    "isaacscript-tsconfig": "^4.1.1",
+    "typescript": "^5.2.2",
+    "typescript-to-lua": "^1.20.1"
+  }
+}

@@ -1,0 +1,7 @@
+<items gfxroot="gfx/items/" version="1" deathanm2="gfx/death items.anm2">
+        <active name = "mimesis" id = "733" description = "mimic boss"
+        gfx = "mimesis.png" quality = "3" maxcharges = "6" chargetype = "normal"/>
+        <passive name = "MonstroMimic" id = "1" description = "Learn to be Monstro"
+        gfx = "monstro.png" quality = "1" hidden = "true" craftquality = "-1"/>
+</items>
+
