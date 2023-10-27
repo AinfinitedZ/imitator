@@ -7,44 +7,52 @@ import {
 import {
   addCollectible,
   doesEntityExist,
+  findFreePosition,
   getClosestEntityTo,
   getEntities,
   getPlayers,
   isActiveEnemy,
+  isRoomDangerous,
   removeCollectible,
   setEntityVelocities,
   spawn,
   spawnCollectibleUnsafe,
   spawnEffect,
 } from "isaacscript-common";
-import { iterateMimicTrack, setMimicSpecificBoss } from "./mimicTrack";
+import { iterateMimicTrack, removePreviousMimic, setMimicSpecificBoss } from "./mimicTrack";
 import { mod } from "./main"
 
 const player = Isaac.GetPlayer();
 
 export function ifPlayerPickupMonstro() {
-  addCollectible(player, Isaac.GetItemIdByName("Monstro's Lung"));
-  addCollectible(player, Isaac.GetItemIdByName("MonstroMimesis"));
+  addCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("Monstro's Lung"));
+  addCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("MonstroMimesis"));
   const postMimic = iterateMimicTrack();
-  if (postMimic !== "Not found" && postMimic !== "MonstroMimic" && !doesEntityExist(EntityType.MONSTRO)) {
+
+  if (postMimic !== "Not found" && postMimic !== "MonstroMimic") {
     spawnCollectibleUnsafe(
       Isaac.GetItemIdByName(postMimic),
-      Vector(300, 280),
+      findFreePosition(Vector(300, 280)),
       undefined,
     );
   }
-  //TODO: function that remove previous mimic
-  removeCollectible(player, Isaac.GetItemIdByName("LarryMimic"));
+  print(postMimic);
+  removePreviousMimic(postMimic);
+
   setMimicSpecificBoss("MonstroMimic", true);
+  setMimicSpecificBoss(postMimic, false);
 }
 
 export function postBossMonstroDefeated() {
-  spawnCollectibleUnsafe(
-    Isaac.GetItemIdByName("MonstroMimic"),
-    Vector(300, 280),
-    undefined,
-  );
+  if(!doesEntityExist(5,100,Isaac.GetItemIdByName("MonstroMimic"))){
+    spawnCollectibleUnsafe(
+      Isaac.GetItemIdByName("MonstroMimic"),
+      findFreePosition(Vector(300, 280)),
+      undefined,
+    );
+  }
 }
+
 
 export function monstroMimesisOnUse() {
   const Entities = getEntities(-1,-1,-1,true);

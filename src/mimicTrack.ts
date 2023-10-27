@@ -1,3 +1,6 @@
+import { TrinketType } from "isaac-typescript-definitions";
+import { removeCollectible, removeTrinketCostume, temporarilyRemoveTrinket } from "isaacscript-common";
+
 let mimicTrack = new Map([
   ["MonstroMimic", false],
   ["LarryMimic", false],
@@ -19,4 +22,14 @@ export function iterateMimicTrack(): string {
     }
   }
   return "Not found";
+}
+
+export function removePreviousMimic(postMimic:String){
+  if(postMimic == "MonstroMimic") {
+    removeCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("Monstro's Lung"));
+    removeCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("MonstroMimic"));
+  } else if(postMimic == "LarryMimic") {
+    temporarilyRemoveTrinket(Isaac.GetPlayer(), TrinketType.BRAIN_WORM);
+    removeCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("LarryMimic"))
+  }
 }

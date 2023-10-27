@@ -6,6 +6,6 @@
           nameimage="playername_imitator.png"
           portrait="playerportrait_imitator.png"
           skin="imitator.png"
-          items = "735"
+          items = "733"
           skinColor="-1"/>
 </players>
