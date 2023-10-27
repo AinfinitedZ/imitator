@@ -7,13 +7,13 @@
 
         <active name = "MonstroMimesis" id = "735" description = "Learn to be Monstro"
         gfx = "monstroMimesis.png" quality = "1" hidden = "true" craftquality = "-1"
-        maxcharges = "60" initcharge = "60" chargetype = "timed"/>
+        maxcharges = "6" initcharge = "6" chargetype = "normal"/>
 
         <passive name = "LarryMimic" id = "736" description = "Learn to be Larry"
         gfx = "larry.png" id = "737" quality = "1" craftquality = "-1"/>
 
         <active name = "LarryMimesis" id = "737" description = "Learn to be Larry"
         gfx = "larryMimesis.png" quality = "1" hidden = "true" craftquality = "-1"
-        maxcharges = "60" initcharge = "60" chargetype = "timed"/>
+        maxcharges = "6" initcharge = "6" chargetype = "normal"/>
 </items>
 

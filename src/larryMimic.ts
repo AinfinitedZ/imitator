@@ -10,9 +10,10 @@ import { iterateMimicTrack, removePreviousMimic, setMimicSpecificBoss } from "./
 import { EffectVariant, EntityType, TrinketType } from "isaac-typescript-definitions";
 
 export function ifPlayerPickupLarry() {
+  const postMimic = iterateMimicTrack();
+  removePreviousMimic(postMimic);
   smeltTrinket(Isaac.GetPlayer(), TrinketType.BRAIN_WORM);
   addCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("LarryMimesis"));
-  const postMimic = iterateMimicTrack();
 
   if (postMimic !== "Not found" && postMimic !== "LarryMimic") {
     spawnCollectibleUnsafe(
@@ -21,10 +22,8 @@ export function ifPlayerPickupLarry() {
       undefined,
     );
   }
-  removePreviousMimic(postMimic);
-
-  setMimicSpecificBoss("LarryMimic", true);
   setMimicSpecificBoss(postMimic, false);
+  setMimicSpecificBoss("LarryMimic", true);
 }
 
 export function postBossLarryDefeated() {

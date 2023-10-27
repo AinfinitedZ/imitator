@@ -16,9 +16,11 @@ import { mod } from "./main"
 const player = Isaac.GetPlayer();
 
 export function ifPlayerPickupMonstro() {
+  const postMimic = iterateMimicTrack();
+  removePreviousMimic(postMimic);
   addCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("Monstro's Lung"));
   addCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("MonstroMimesis"));
-  const postMimic = iterateMimicTrack();
+
 
   if (postMimic !== "Not found" && postMimic !== "MonstroMimic") {
     spawnCollectibleUnsafe(
@@ -27,8 +29,6 @@ export function ifPlayerPickupMonstro() {
       undefined,
     );
   }
-  removePreviousMimic(postMimic);
-
   setMimicSpecificBoss("MonstroMimic", true);
   setMimicSpecificBoss(postMimic, false);
 }
