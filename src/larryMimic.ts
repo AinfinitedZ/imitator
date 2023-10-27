@@ -2,13 +2,12 @@ import {
   addCollectible,
   doesEntityExist,
   findFreePosition,
-  getPlayers,
-  removeCollectible,
   smeltTrinket,
+  spawn,
   spawnCollectibleUnsafe,
 } from "isaacscript-common";
 import { iterateMimicTrack, removePreviousMimic, setMimicSpecificBoss } from "./mimicTrack";
-import { EntityType, TrinketType } from "isaac-typescript-definitions";
+import { EffectVariant, EntityType, TrinketType } from "isaac-typescript-definitions";
 
 export function ifPlayerPickupLarry() {
   smeltTrinket(Isaac.GetPlayer(), TrinketType.BRAIN_WORM);
@@ -39,5 +38,6 @@ export function postBossLarryDefeated() {
 }
 
 export function larryMimesisOnUse() {
+  let target = spawn(EntityType.EFFECT, EffectVariant.TARGET, 0, Isaac.GetPlayer().Position,);
 
 }

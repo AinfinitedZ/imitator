@@ -1,21 +1,12 @@
 import {
-  ButtonAction,
   EffectVariant,
-  EntityPartition,
-  EntityType,
 } from "isaac-typescript-definitions";
 import {
   addCollectible,
   doesEntityExist,
   findFreePosition,
-  getClosestEntityTo,
   getEntities,
-  getPlayers,
   isActiveEnemy,
-  isRoomDangerous,
-  removeCollectible,
-  setEntityVelocities,
-  spawn,
   spawnCollectibleUnsafe,
   spawnEffect,
 } from "isaacscript-common";
@@ -36,7 +27,6 @@ export function ifPlayerPickupMonstro() {
       undefined,
     );
   }
-  print(postMimic);
   removePreviousMimic(postMimic);
 
   setMimicSpecificBoss("MonstroMimic", true);
@@ -65,28 +55,28 @@ export function monstroMimesisOnUse() {
 }
 /*
 export function monstroMimicOnUse() {
-  //TODO: implement surplex!
-  for (const player of getPlayers()) {
-    let target = spawn(
-      EntityType.EFFECT,
-      EffectVariant.TARGET,
-      0,
-      player.Position,
-    );
+//TODO: implement surplex!
+
+  let target = spawn(
+    EntityType.EFFECT,
+    EffectVariant.TARGET,
+    0,
+    Isaac.GetPlayer().Position,
+  );
 
 
 
-    let targetArray = [target];
-    const targetPtrHash = GetPtrHash(target);
-    const NUM_FRAME_LEFT = 30;
-    moveTargetUntilExplosion(
-      target,
-      NUM_FRAME_LEFT,
-      targetPtrHash,
-      targetArray,
-    );
-  }
+  let targetArray = [target];
+  const targetPtrHash = GetPtrHash(target);
+  const NUM_FRAME_LEFT = 30;
+  moveTargetUntilExplosion(
+    target,
+    NUM_FRAME_LEFT,
+    targetPtrHash,
+    targetArray,
+  );
 }
+
 function moveTargetUntilExplosion(
   target: Entity,
   numFramesLeft: int,
