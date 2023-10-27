@@ -1,37 +1,41 @@
 import {
   ButtonAction,
   EffectVariant,
+  EntityPartition,
   EntityType,
 } from "isaac-typescript-definitions";
 import {
   addCollectible,
   doesEntityExist,
+  getClosestEntityTo,
+  getEntities,
   getPlayers,
+  isActiveEnemy,
   removeCollectible,
   setEntityVelocities,
   spawn,
   spawnCollectibleUnsafe,
+  spawnEffect,
 } from "isaacscript-common";
 import { iterateMimicTrack, setMimicSpecificBoss } from "./mimicTrack";
 import { mod } from "./main"
 
+const player = Isaac.GetPlayer();
+
 export function ifPlayerPickupMonstro() {
-  for (const player of getPlayers()) {
-    addCollectible(player, Isaac.GetItemIdByName("Monstro's Lung"));
-    addCollectible(player, Isaac.GetItemIdByName("MonstroMimesis"));
-    const postMimic = iterateMimicTrack();
-    if (postMimic !== "Not found" && postMimic !== "MonstroMimic" &&
-        doesEntityExist(EntityType.PICKUP, 0, Isaac.GetItemIdByName("MonstroMimesis"))) {
-      spawnCollectibleUnsafe(
-        Isaac.GetItemIdByName(postMimic),
-        Vector(300, 280),
-        undefined,
-      );
-    }
-    //TODO: function that remove previous mimic
-    removeCollectible(player, Isaac.GetItemIdByName("LarryMimic"));
-    setMimicSpecificBoss("MonstroMimic", true);
+  addCollectible(player, Isaac.GetItemIdByName("Monstro's Lung"));
+  addCollectible(player, Isaac.GetItemIdByName("MonstroMimesis"));
+  const postMimic = iterateMimicTrack();
+  if (postMimic !== "Not found" && postMimic !== "MonstroMimic" && !doesEntityExist(EntityType.MONSTRO)) {
+    spawnCollectibleUnsafe(
+      Isaac.GetItemIdByName(postMimic),
+      Vector(300, 280),
+      undefined,
+    );
   }
+  //TODO: function that remove previous mimic
+  removeCollectible(player, Isaac.GetItemIdByName("LarryMimic"));
+  setMimicSpecificBoss("MonstroMimic", true);
 }
 
 export function postBossMonstroDefeated() {
@@ -42,8 +46,14 @@ export function postBossMonstroDefeated() {
   );
 }
 
-export function monstroMimicOnUse() {
-
+export function monstroMimesisOnUse() {
+  const Entities = getEntities(-1,-1,-1,true);
+  for (const entity of Entities) {
+    if(entity !== undefined && isActiveEnemy(entity)) {
+      spawnEffect(EffectVariant.MONSTROS_TOOTH, 0, entity.Position);
+      break;
+    }
+  }
 }
 /*
 export function monstroMimicOnUse() {

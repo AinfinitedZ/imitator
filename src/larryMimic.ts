@@ -14,8 +14,7 @@ export function ifPlayerPickupLarry() {
     addCollectible(player, Isaac.GetItemIdByName("LarryMimesis"));
     const postMimic = iterateMimicTrack();
     print(postMimic);
-    if (postMimic !== "Not found" && postMimic !== "LarryMimic" &&
-        doesEntityExist(EntityType.PICKUP, 0, Isaac.GetItemIdByName("MonstroMimesis"))) {
+    if (postMimic !== "Not found" && postMimic !== "LarryMimic" && !doesEntityExist(EntityType.LARRY_JR)) {
       spawnCollectibleUnsafe(
         Isaac.GetItemIdByName(postMimic),
         Vector(300, 280),
