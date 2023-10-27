@@ -1,19 +1,13 @@
 <items gfxroot="gfx/items/" version="1" deathanm2="gfx/death items.anm2">
         <active name = "mimesis" id = "733" description = "mimic boss"
-        gfx = "mimesis.png" quality = "3" maxcharges = "6" chargetype = "normal"/>
+        gfx = "mimesis.png" quality = "3" chargetype = "normal"/>
 
-        <passive name = "MonstroMimic" id = "734" description = "Learn to be Monstro"
-        gfx = "monstro.png" quality = "1" hidden = "true" craftquality = "-1"/>
-
-        <active name = "MonstroMimesis" id = "735" description = "Learn to be Monstro"
+        <active name = "MonstroMimesis" id = "734" description = "Learn to be Monstro"
         gfx = "monstroMimesis.png" quality = "1" hidden = "true" craftquality = "-1"
-        maxcharges = "6" initcharge = "6" chargetype = "normal"/>
+        maxcharges = "60" initcharge = "60" chargetype = "timed"/>
 
-        <passive name = "LarryMimic" id = "736" description = "Learn to be Larry"
-        gfx = "larry.png" id = "737" quality = "1" craftquality = "-1"/>
-
-        <active name = "LarryMimesis" id = "737" description = "Learn to be Larry"
+        <active name = "LarryMimesis" id = "735" description = "Learn to be Larry"
         gfx = "larryMimesis.png" quality = "1" hidden = "true" craftquality = "-1"
-        maxcharges = "6" initcharge = "6" chargetype = "normal"/>
+        maxcharges = "60" initcharge = "60" chargetype = "timed"/>
 </items>
 

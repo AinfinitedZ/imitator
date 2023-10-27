@@ -1,5 +1,3 @@
-import { CollectibleType, ModCallback } from "isaac-typescript-definitions";
-import { onuse } from "./mimesis";
 import { ModCallbackCustom, upgradeMod, addCollectible, hasCollectibleInActiveSlot, ISCFeature} from "isaacscript-common";
 import { ifPlayerPickupMonstro, monstroMimesisOnUse, postBossMonstroDefeated } from "./monstroMimic";
 import { larryMimesisOnUse, ifPlayerPickupLarry, postBossLarryDefeated } from "./larryMimic";

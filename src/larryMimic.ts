@@ -7,13 +7,12 @@ import {
   spawnCollectibleUnsafe,
 } from "isaacscript-common";
 import { iterateMimicTrack, removePreviousMimic, setMimicSpecificBoss } from "./mimicTrack";
-import { EffectVariant, EntityType, TrinketType } from "isaac-typescript-definitions";
+import { CollectibleType, EffectVariant, EntityType, TrinketType } from "isaac-typescript-definitions";
 
 export function ifPlayerPickupLarry() {
   const postMimic = iterateMimicTrack();
   removePreviousMimic(postMimic);
   smeltTrinket(Isaac.GetPlayer(), TrinketType.BRAIN_WORM);
-  addCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("LarryMimesis"));
 
   if (postMimic !== "Not found" && postMimic !== "LarryMimic") {
     spawnCollectibleUnsafe(
@@ -27,9 +26,9 @@ export function ifPlayerPickupLarry() {
 }
 
 export function postBossLarryDefeated() {
-  if(!doesEntityExist(5,100,Isaac.GetItemIdByName("LarryMimic"))){
+  if(!doesEntityExist(5,100,Isaac.GetItemIdByName("LarryMimesis"))){
     spawnCollectibleUnsafe(
-      Isaac.GetItemIdByName("LarryMimic"),
+      Isaac.GetItemIdByName("LarryMimesis"),
       findFreePosition(Vector(300, 280)),
       undefined,
     );
@@ -37,6 +36,5 @@ export function postBossLarryDefeated() {
 }
 
 export function larryMimesisOnUse() {
-  let target = spawn(EntityType.EFFECT, EffectVariant.TARGET, 0, Isaac.GetPlayer().Position,);
-
+  Isaac.GetPlayer().UseActiveItem(CollectibleType.WHITE_PONY);
 }

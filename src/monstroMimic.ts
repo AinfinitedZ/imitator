@@ -11,16 +11,11 @@ import {
   spawnEffect,
 } from "isaacscript-common";
 import { iterateMimicTrack, removePreviousMimic, setMimicSpecificBoss } from "./mimicTrack";
-import { mod } from "./main"
-
-const player = Isaac.GetPlayer();
 
 export function ifPlayerPickupMonstro() {
   const postMimic = iterateMimicTrack();
   removePreviousMimic(postMimic);
   addCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("Monstro's Lung"));
-  addCollectible(Isaac.GetPlayer(), Isaac.GetItemIdByName("MonstroMimesis"));
-
 
   if (postMimic !== "Not found" && postMimic !== "MonstroMimic") {
     spawnCollectibleUnsafe(
@@ -34,15 +29,14 @@ export function ifPlayerPickupMonstro() {
 }
 
 export function postBossMonstroDefeated() {
-  if(!doesEntityExist(5,100,Isaac.GetItemIdByName("MonstroMimic"))){
+  if(!doesEntityExist(5,100,Isaac.GetItemIdByName("MonstroMimesis"))){
     spawnCollectibleUnsafe(
-      Isaac.GetItemIdByName("MonstroMimic"),
+      Isaac.GetItemIdByName("MonstroMimesis"),
       findFreePosition(Vector(300, 280)),
       undefined,
     );
   }
 }
-
 
 export function monstroMimesisOnUse() {
   const Entities = getEntities(-1,-1,-1,true);
@@ -53,55 +47,3 @@ export function monstroMimesisOnUse() {
     }
   }
 }
-/*
-export function monstroMimicOnUse() {
-//TODO: implement surplex!
-
-  let target = spawn(
-    EntityType.EFFECT,
-    EffectVariant.TARGET,
-    0,
-    Isaac.GetPlayer().Position,
-  );
-
-
-
-  let targetArray = [target];
-  const targetPtrHash = GetPtrHash(target);
-  const NUM_FRAME_LEFT = 30;
-  moveTargetUntilExplosion(
-    target,
-    NUM_FRAME_LEFT,
-    targetPtrHash,
-    targetArray,
-  );
-}
-
-function moveTargetUntilExplosion(
-  target: Entity,
-  numFramesLeft: int,
-  targetPtrHash: PtrHash,
-  targetArray: Entity[],
-) {
-  const velocity = Vector(
-    Input.GetActionValue(ButtonAction.LEFT, 0),
-    Input.GetActionValue(ButtonAction.LEFT, 0),
-  );
-  let targetMap = new Map([[targetPtrHash, velocity]]);
-  setEntityVelocities(targetMap, targetArray);
-  if (numFramesLeft > 0) {
-    //mod.runNextGameFrame(() => {
-    moveTargetUntilExplosion(
-      target,
-      (numFramesLeft -= 1),
-      targetPtrHash,
-      targetArray,
-    );
-    //});
-  }
-  for (const player of getPlayers()) {
-    spawn(EntityType.EFFECT, EffectVariant.SHOCKWAVE, 0, player.Position);
-  }
-}
-  */
-
