@@ -8,7 +8,7 @@
   "extends": "isaacscript-tsconfig/tsconfig.mod.json",
 
   // A list of the TypeScript files to compile.
-  "include": ["./src/**/*.ts"],
+  "include": ["./src/**/*.ts", "tests/test.ts"],
 
   // TypeScriptToLua settings
   "tstl": {
@@ -38,4 +38,18 @@
     // https://isaacscript.github.io/main/custom-stages
     "customStages": [],
   },
+
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "esModuleInterop": true,
+    "lib": ["es2022", "dom"],
+    "module": "commonjs",
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "es2022",
+    "types": ["node"]
+},
+"exclude": ["./build"]
 }
